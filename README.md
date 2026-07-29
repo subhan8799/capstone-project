@@ -17,13 +17,28 @@ Initial focus is on repository setup, workflow conventions, and delivery discipl
 
 ## Getting Started
 
-1. Install Node.js LTS and Git.
-2. Clone the repository.
-3. Install dependencies when added:
+### Prerequisites
+
+- Node.js LTS (npm included)
+- Git
+- VS Code
+
+Verify your toolchain:
+
+```bash
+node --version
+npm --version
+git --version
+```
+
+### Setup
+
+1. Clone the repository.
+2. Install dependencies when added:
    ```bash
    npm install
    ```
-4. Start or test scripts after they are defined in `package.json`.
+3. Start or test scripts after they are defined in `package.json`.
 
 ## Workflow Conventions
 
