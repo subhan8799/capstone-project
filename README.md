@@ -185,6 +185,24 @@ Important production notes:
 - Vite exposes only env vars prefixed with `VITE_`.
 - Do not wrap values in quotes.
 - After changing env vars, redeploy (a refresh is not enough).
+- If auth still shows missing variables, open Netlify Deploy details and confirm those variables are present in that deploy context (Production, Deploy Preview, or Branch Deploy).
+
+## Production Firebase Checklist
+
+If production shows "Firebase environment variables are missing", verify this in order:
+
+1. Variable names in Netlify exactly match:
+	- `VITE_FIREBASE_API_KEY`
+	- `VITE_FIREBASE_AUTH_DOMAIN`
+	- `VITE_FIREBASE_PROJECT_ID`
+	- `VITE_FIREBASE_APP_ID`
+2. Values are not placeholders like `YOUR_...`.
+3. Variables are defined for the correct deploy context (Production).
+4. Trigger "Clear cache and deploy site" after saving variables.
+5. Confirm Firebase project settings:
+	- Authentication enabled
+	- Email/Password and Google providers enabled
+	- Authorized domain includes your Netlify domain
 
 ## Auth Troubleshooting
 
