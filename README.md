@@ -1,54 +1,60 @@
 # Capstone Project
 
-A starter repository for the capstone assignment.
+A compact React + TypeScript workspace centered on a validated, accessible user settings form.
 
 ## Overview
 
-This project will evolve into a production-ready capstone application.
-Initial focus is on repository setup, workflow conventions, and delivery discipline.
+The current project focus is a production-ready form workflow: schema validation, accessible error handling, safe async submission, and test-backed UI behavior.
 
 ## Tech Stack
 
-- Runtime: Node.js LTS
-- Package manager: npm
-- Version control: Git + GitHub
-- Editor: VS Code
-- AI workflow: Claude Code
+- React 18
+- TypeScript
+- react-hook-form
+- zod
+- Vitest
+- React Testing Library
+
+## Project Structure
+
+```text
+capstone-project/
+|-- docs/
+|   `-- WORKFLOW.md
+|-- src/
+|   |-- components/
+|   |   |-- __tests__/
+|   |   |   `-- UserSettingsForm.test.tsx
+|   |   `-- UserSettingsForm.tsx
+|   `-- test/
+|       `-- setup.ts
+|-- CLAUDE.md
+|-- package.json
+|-- tsconfig.json
+`-- vitest.config.ts
+```
 
 ## Getting Started
 
 ### Prerequisites
 
-- Node.js LTS (npm included)
-- Git
-- VS Code
+- Node.js LTS
+- npm
 
-Verify your toolchain:
+### Install
 
 ```bash
-node --version
-npm --version
-git --version
+npm install
 ```
 
-### Setup
+### Test
 
-1. Clone the repository.
-2. Install dependencies when added:
-   ```bash
-   npm install
-   ```
-3. Start or test scripts after they are defined in `package.json`.
+```bash
+npm test
+```
 
-## Workflow Conventions
+## Notes
 
-- Commits follow Conventional Commits.
-- Keep pull requests focused and small.
-- Update documentation whenever behavior changes.
-
-## Milestone 0 Deliverables
-
-- README stub
-- License
-- `.gitignore`
-- `CLAUDE.md`
+- Form validation is defined with `zod` and wired through `react-hook-form`.
+- UI behavior is verified with Vitest and React Testing Library.
+- Project workflow rules live in `CLAUDE.md`.

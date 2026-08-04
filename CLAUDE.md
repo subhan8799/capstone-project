@@ -29,3 +29,9 @@ Current phase focuses on setup quality, commit hygiene, and documentation-first 
 - Propose minimal, reversible changes.
 - Explain why changes are needed.
 - Keep code and docs aligned.
+
+## Lessons & Workflow Rules
+
+- Forms: All forms must use `react-hook-form` paired with `zod` schemas; uncontrolled standard HTML inputs are prohibited.
+- Accessibility: Every input element must have an associated `<label>` element, and active validation errors must toggle `aria-invalid="true"` and set `aria-describedby`.
+- Verification: Every newly created UI component must include a corresponding unit test file covering primary user interaction and error states before merging.

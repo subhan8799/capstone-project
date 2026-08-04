@@ -1,0 +1,17 @@
+# WORKFLOW
+
+## Code Correctness & Edge Cases
+
+Round 1, using a vague one-line prompt, tends to produce a form that looks plausible but is structurally weak. The common failure mode is uncontrolled inputs with ad hoc state updates, no schema-level validation, and no consistent async submission handling. That usually means edge cases are patched after the fact: empty names slip through, email checks are partial, the submit button remains clickable during a pending request, and success or failure states are bolted on later. Round 2 is materially different because the prompt specifies implementation constraints and review targets up front. Using react-hook-form with a Zod schema moves correctness rules into one source of truth, so minimum name length, valid email format, and required role selection are enforced consistently. The component also treats async submission as a first-class behavior by disabling the fieldset while saving, exposing a loading label, catching thrown errors, and resetting form state only after a successful save.
+
+## Accessibility (WCAG 2.1 AA)
+
+The Round 1 output often misses accessible mechanics because they are not demanded explicitly. Typical gaps are placeholder-only inputs, labels not programmatically associated with controls, and validation text that appears visually without being announced to assistive technology. In practice, that leaves keyboard and screen-reader users with a broken experience even when the UI looks acceptable. Round 2 fixes that by stating the accessibility contract directly: every control has a real label bound with htmlFor and id, invalid fields toggle aria-invalid="true", and each active validation message is connected through aria-describedby. Error content is rendered with alert semantics so it can be announced when it appears, while the success message uses status semantics. Keyboard navigation also becomes verifiable rather than assumed, because native controls remain focusable in a predictable sequence.
+
+## AI Mistakes Caught During Review
+
+The most important bug caught in review from a Round 1 style output was unsafe async handling. The generated submit handler awaited an API call without a defensive try/catch path, which risks an unhandled promise rejection and leaves users without feedback when the request fails. A related issue was that the button state was not locked during the pending request, allowing duplicate submissions. Review also caught missing error-state wiring, where error text rendered visually but inputs never exposed aria-invalid or aria-describedby.
+
+## Total Time & Review Effort
+
+Round 1 looked faster only at the moment of generation. In reality, the vague prompt shifted effort into manual refactoring, debugging, and accessibility repair. Time was spent rewriting validation logic, threading loading state through the UI, and patching tests after defects were found. Round 2 front-loads clarity by specifying library choices, edge cases, and verification requirements. That produced code that matched the expected architecture on the first pass and required review, not redesign. The total effort was lower because testing and accessibility were built in rather than retrofitted, and the result required zero manual refactoring before validation.
