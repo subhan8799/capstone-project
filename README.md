@@ -159,6 +159,33 @@ firebase init hosting
 firebase deploy
 ```
 
+## Netlify Production Setup
+
+If your deployed URL shows `Page not found` on paths like `/login`, this is a single-page app rewrite issue.
+
+This repository now includes [netlify.toml](netlify.toml) with a catch-all redirect to `index.html` so route paths work in production.
+
+In Netlify Dashboard, configure these Environment Variables exactly as named in [.env.example](.env.example):
+
+- `VITE_FIREBASE_API_KEY`
+- `VITE_FIREBASE_AUTH_DOMAIN`
+- `VITE_FIREBASE_PROJECT_ID`
+- `VITE_FIREBASE_STORAGE_BUCKET`
+- `VITE_FIREBASE_MESSAGING_SENDER_ID`
+- `VITE_FIREBASE_APP_ID`
+- `VITE_FIREBASE_MEASUREMENT_ID`
+- `VITE_TMDB_BASE_URL`
+- `VITE_TMDB_IMAGE_BASE_URL`
+- `VITE_TMDB_API_READ_ACCESS_TOKEN` or `VITE_TMDB_API_KEY`
+
+Then trigger a new deploy with cache clear.
+
+Important production notes:
+
+- Vite exposes only env vars prefixed with `VITE_`.
+- Do not wrap values in quotes.
+- After changing env vars, redeploy (a refresh is not enough).
+
 ## Auth Troubleshooting
 
 If login, Google popup, or sign-up returns `auth/configuration-not-found` (or API `CONFIGURATION_NOT_FOUND`), your Firebase project authentication backend is not initialized yet.
