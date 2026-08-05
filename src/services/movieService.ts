@@ -36,6 +36,15 @@ const FALLBACK_GENRES = [28, 35, 27, 10749, 878, 99] as const;
 let fallbackCache: Movie[] | null = null;
 const fallbackTitleById = new Map<number, string>();
 const fallbackSourceById = new Map<number, FallbackApiMovie>();
+const seenMoviesById = new Map<number, Movie>();
+
+function rememberMovies(movies: Movie[]) {
+  movies.forEach((movie) => {
+    if (Number.isFinite(movie.id) && movie.id > 0) {
+      seenMoviesById.set(movie.id, movie);
+    }
+  });
+}
 
 function hashToPositiveInt(value: string) {
   let hash = 0;
@@ -191,20 +200,29 @@ function mapMovie(item: MovieApiResult): Movie {
   };
 }
 
+function mapListMovies(items: MovieApiResult[]) {
+  const movies = items
+    .map(mapMovie)
+    .filter((movie) => Boolean(movie.posterPath || movie.backdropPath))
+    .slice(0, 20);
+
+  rememberMovies(movies);
+  return movies;
+}
+
 export async function fetchMoviesByCategory(category: keyof typeof categoryQueryMap) {
   return withFallback(
     async () => {
       const { data } = await apiClient.get<MovieListResponse>(categoryQueryMap[category], {
         params: { page: 1 },
       });
-      return data.results
-        .map(mapMovie)
-        .filter((movie) => Boolean(movie.posterPath || movie.backdropPath))
-        .slice(0, 20);
+      return mapListMovies(data.results);
     },
     async () => {
       const movies = await getFallbackMovies();
-      return categoryFallback(movies, category);
+      const categoryMovies = categoryFallback(movies, category);
+      rememberMovies(categoryMovies);
+      return categoryMovies;
     },
   );
 }
@@ -213,21 +231,28 @@ export async function fetchMovieDetails(movieId: number) {
   return withFallback(
     async () => {
       const { data } = await apiClient.get<MovieApiResult>(`/movie/${movieId}`);
-      return mapMovie(data);
+      const movie = mapMovie(data);
+      rememberMovies([movie]);
+      return movie;
     },
     async () => {
       const movies = await getFallbackMovies();
       const movie = movies.find((item) => item.id === movieId);
       if (movie) {
+        rememberMovies([movie]);
         return movie;
       }
 
-      const firstMovie = movies[0];
-      if (!firstMovie) {
-        throw new Error('No movie data available from fallback provider.');
+      const seenMovie = seenMoviesById.get(movieId);
+      if (seenMovie) {
+        return {
+          ...seenMovie,
+          runtime: seenMovie.runtime,
+          genres: seenMovie.genres ?? [],
+        };
       }
 
-      return firstMovie;
+      throw new Error('Movie details were not found for the selected title.');
     },
   );
 }
@@ -238,16 +263,15 @@ export async function fetchRelatedMovies(movieId: number) {
       const { data } = await apiClient.get<MovieListResponse>(`/movie/${movieId}/similar`, {
         params: { page: 1 },
       });
-      return data.results
-        .map(mapMovie)
-        .filter((movie) => Boolean(movie.posterPath || movie.backdropPath))
-        .slice(0, 20);
+      return mapListMovies(data.results);
     },
     async () => {
       const movies = await getFallbackMovies();
-      const current = movies.find((movie) => movie.id === movieId);
+      const current = movies.find((movie) => movie.id === movieId) ?? seenMoviesById.get(movieId);
       if (!current) {
-        return movies.slice(0, 12);
+        const fallbackRelated = movies.slice(0, 12);
+        rememberMovies(fallbackRelated);
+        return fallbackRelated;
       }
 
       const sameGenre = movies.filter(
@@ -255,10 +279,14 @@ export async function fetchRelatedMovies(movieId: number) {
       );
 
       if (sameGenre.length) {
-        return sameGenre.slice(0, 20);
+        const related = sameGenre.slice(0, 20);
+        rememberMovies(related);
+        return related;
       }
 
-      return movies.filter((movie) => movie.id !== movieId).slice(0, 20);
+      const related = movies.filter((movie) => movie.id !== movieId).slice(0, 20);
+      rememberMovies(related);
+      return related;
     },
   );
 }
@@ -269,15 +297,14 @@ export async function searchMovies(query: string) {
       const { data } = await apiClient.get<MovieListResponse>(`/search/movie`, {
         params: { query, page: 1 },
       });
-      return data.results
-        .map(mapMovie)
-        .filter((movie) => Boolean(movie.posterPath || movie.backdropPath))
-        .slice(0, 20);
+      return mapListMovies(data.results);
     },
     async () => {
       const movies = await getFallbackMovies();
       const normalizedQuery = query.trim().toLowerCase();
-      return movies.filter((movie) => movie.title.toLowerCase().includes(normalizedQuery)).slice(0, 20);
+      const searched = movies.filter((movie) => movie.title.toLowerCase().includes(normalizedQuery)).slice(0, 20);
+      rememberMovies(searched);
+      return searched;
     },
   );
 }

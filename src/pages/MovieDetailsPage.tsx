@@ -12,14 +12,23 @@ import { toImageUrl } from '../utils/image';
 export function MovieDetailsPage() {
   const { id } = useParams();
   const movieId = Number(id);
+  const hasValidMovieId = Number.isFinite(movieId) && movieId > 0;
   const detailsQuery = useMovieDetails(movieId);
   const relatedQuery = useRelatedMovies(movieId);
 
   useEffect(() => {
-    if (movieId) {
+    if (hasValidMovieId) {
       pushContinueWatchingId(movieId);
     }
-  }, [movieId]);
+  }, [hasValidMovieId, movieId]);
+
+  if (!hasValidMovieId) {
+    return (
+      <div className="rounded-2xl border border-amber-400/30 bg-amber-500/10 p-5 text-amber-200">
+        This movie link is invalid. Please open a title from the Home page and try again.
+      </div>
+    );
+  }
 
   if (detailsQuery.isLoading) {
     return <div className="skeleton h-[65vh] w-full rounded-3xl" />;
@@ -36,7 +45,7 @@ export function MovieDetailsPage() {
   if (!detailsQuery.data) {
     return (
       <div className="rounded-2xl border border-amber-400/30 bg-amber-500/10 p-5 text-amber-200">
-        Movie details are unavailable right now.
+        Movie details are currently unavailable for this title.
       </div>
     );
   }
