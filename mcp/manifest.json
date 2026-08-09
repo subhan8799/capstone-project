@@ -1,0 +1,79 @@
+{
+  "name": "MiniFlix FL-04 MCP Agent Manifest",
+  "version": "1.0.0",
+  "description": "Local MCP manifest for the MiniFlix FL-04 repository, exposing repository tools, documentation resources, prompts, and agent tasks.",
+  "tools": [
+    {
+      "id": "repo_file_reader",
+      "type": "read",
+      "description": "Read file contents from the repository root. Use only safe paths under the project directory.",
+      "endpoint": "/mcp/read-file?path={relativePath}"
+    },
+    {
+      "id": "repo_search",
+      "type": "query",
+      "description": "Search repository documentation and source files for keywords, patterns, or configuration references.",
+      "endpoint": "/mcp/search?q={query}"
+    },
+    {
+      "id": "server_health",
+      "type": "monitor",
+      "description": "Check the MCP server status and uptime.",
+      "endpoint": "/mcp/ping"
+    }
+  ],
+  "resources": [
+    {
+      "id": "assignment_docs",
+      "type": "documentation",
+      "description": "Project assignment and workflow documentation under docs/assignments.",
+      "path": "docs/assignments"
+    },
+    {
+      "id": "workflow_helper",
+      "type": "tool",
+      "description": "Node helper that generates study notes templates from workflow/study-notes-inputs.json.",
+      "path": "workflow/generate-study-notes-run.js"
+    },
+    {
+      "id": "readme",
+      "type": "documentation",
+      "description": "Project README with setup, environment, and MCP instructions.",
+      "path": "README.md"
+    }
+  ],
+  "prompts": [
+    {
+      "id": "scan_repo_state",
+      "description": "Inspect the repository and determine whether the current FL-04 submission is a workflow, an agent, or both.",
+      "example": "Review the repository structure, docs, and scripts. Tell me if FL-04 is currently a workflow or an agent and why."
+    },
+    {
+      "id": "generate_agent_plan",
+      "description": "Create a concrete agent upgrade proposal for FL-04 using the available MCP tools and resources.",
+      "example": "Using the repo_file_reader and assignment_docs resources, describe an agent that can audit forms, run checks, and update documentation."
+    },
+    {
+      "id": "write_evidence_checklist",
+      "description": "Produce a screenshot/evidence checklist for deployment and MCP server verification.",
+      "example": "List the exact screens and outputs someone should capture while running the project and the MCP server."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "task_1",
+      "title": "Verify current workflow status and manifest metadata",
+      "description": "Use repo_file_reader to inspect project files and confirm whether FL-04 is a workflow or agent."
+    },
+    {
+      "id": "task_2",
+      "title": "Update the README with MCP integration and commands",
+      "description": "Use assignment_docs resource and repo_search to add setup and server commands without breaking the existing app."
+    },
+    {
+      "id": "task_3",
+      "title": "Document three real MCP tasks for the assignment",
+      "description": "Create task documentation that maps agent capabilities to repository tools and resources."
+    }
+  ]
+}

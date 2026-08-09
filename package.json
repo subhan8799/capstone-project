@@ -10,7 +10,10 @@
     "preview": "vite preview",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "mcp:start": "node mcp/server.js",
+    "mcp:check": "node mcp/server.js --check",
+    "workflow:study-notes": "node workflow/generate-study-notes-run.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

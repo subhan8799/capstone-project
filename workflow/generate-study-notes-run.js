@@ -44,11 +44,11 @@ async function main() {
 ${(run.sources || []).map((source) => `  - ${source.title || '[title]'} (${source.url || '[url]'})`).join('\n')}
 
 ## 2. Prompts and configuration
-- Gather prompt: see `docs/assignments/STUDY_NOTES_PROMPTS.md`
-- Synthesize prompt: see `docs/assignments/STUDY_NOTES_PROMPTS.md`
-- Draft prompt: see `docs/assignments/STUDY_NOTES_PROMPTS.md`
-- Review prompt: see `docs/assignments/STUDY_NOTES_PROMPTS.md`
-- Format prompt: see `docs/assignments/STUDY_NOTES_PROMPTS.md`
+- Gather prompt: see 'docs/assignments/STUDY_NOTES_PROMPTS.md'
+- Synthesize prompt: see 'docs/assignments/STUDY_NOTES_PROMPTS.md'
+- Draft prompt: see 'docs/assignments/STUDY_NOTES_PROMPTS.md'
+- Review prompt: see 'docs/assignments/STUDY_NOTES_PROMPTS.md'
+- Format prompt: see 'docs/assignments/STUDY_NOTES_PROMPTS.md'
 
 ## 3. Step outputs
 ### Step 1 — Gather

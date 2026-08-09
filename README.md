@@ -109,13 +109,38 @@ npm install --legacy-peer-deps
 npm run dev
 ```
 
-3. Type check:
+3. Start the local MCP server:
+
+```bash
+npm run mcp:start
+```
+
+4. Validate the MCP manifest and server:
+
+```bash
+npm run mcp:check
+```
+
+5. Generate study-note workflow templates:
+
+```bash
+npm run workflow:study-notes
+```
+
+6. Start the MCP server and verify it is working:
+
+```bash
+npm run mcp:start
+npm run mcp:check
+```
+
+7. Type check:
 
 ```bash
 npm run typecheck
 ```
 
-4. Production build:
+7. Production build:
 
 ```bash
 npm run build
