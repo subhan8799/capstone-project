@@ -1,0 +1,58 @@
+{
+  "runs": [
+    {
+      "id": "run-1",
+      "title": "Run 1: [Topic title]",
+      "topic": "[Topic for run 1]",
+      "researchQuestion": "[One sentence research question for run 1]",
+      "sources": [
+        {
+          "title": "[Source 1 title]",
+          "url": "[Source 1 URL]",
+          "type": "article",
+          "notes": "[Optional reliability note]"
+        },
+        {
+          "title": "[Source 2 title]",
+          "url": "[Source 2 URL]",
+          "type": "paper",
+          "notes": "[Optional reliability note]"
+        },
+        {
+          "title": "[Source 3 title]",
+          "url": "[Source 3 URL]",
+          "type": "report",
+          "notes": "[Optional reliability note]"
+        }
+      ]
+    },
+    {
+      "id": "run-2",
+      "title": "Run 2: [Topic title]",
+      "topic": "[Topic for run 2]",
+      "researchQuestion": "[One sentence research question for run 2]",
+      "sources": []
+    },
+    {
+      "id": "run-3",
+      "title": "Run 3: [Topic title]",
+      "topic": "[Topic for run 3]",
+      "researchQuestion": "[One sentence research question for run 3]",
+      "sources": []
+    },
+    {
+      "id": "run-4",
+      "title": "Run 4: [Topic title]",
+      "topic": "[Topic for run 4]",
+      "researchQuestion": "[One sentence research question for run 4]",
+      "sources": []
+    },
+    {
+      "id": "run-5",
+      "title": "Run 5: [Topic title]",
+      "topic": "[Topic for run 5]",
+      "researchQuestion": "[One sentence research question for run 5]",
+      "sources": []
+    }
+  ]
+}
