@@ -15,7 +15,11 @@
     "mcp:check": "node mcp/server.js --check",
     "workflow:study-notes": "node workflow/generate-study-notes-run.js",
     "workflow:run-study-notes": "node workflow/run-study-notes.js",
-    "test": "node --test"
+    "test": "node --test",
+    "agent:fl-06": "node agents/fl-06-agent.js"
+  },
+  "engines": {
+    "node": ">=18"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
