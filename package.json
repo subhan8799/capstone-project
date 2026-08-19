@@ -13,7 +13,9 @@
     "typecheck": "tsc --noEmit",
     "mcp:start": "node mcp/server.js",
     "mcp:check": "node mcp/server.js --check",
-    "workflow:study-notes": "node workflow/generate-study-notes-run.js"
+    "workflow:study-notes": "node workflow/generate-study-notes-run.js",
+    "workflow:run-study-notes": "node workflow/run-study-notes.js",
+    "test": "node --test"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

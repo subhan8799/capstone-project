@@ -1,0 +1,11 @@
+{
+  "run": {
+    "id": "run-3",
+    "title": "Run 3: [Topic title]",
+    "topic": "[Topic for run 3]",
+    "researchQuestion": "[One sentence research question for run 3]",
+    "sources": []
+  },
+  "fetched": [],
+  "timestamp": 1787173333445
+}

@@ -1,0 +1,55 @@
+{
+  "run": {
+    "id": "run-1",
+    "title": "Run 1: [Topic title]",
+    "topic": "[Topic for run 1]",
+    "researchQuestion": "[One sentence research question for run 1]",
+    "sources": [
+      {
+        "title": "[Source 1 title]",
+        "url": "[Source 1 URL]",
+        "type": "article",
+        "notes": "[Optional reliability note]"
+      },
+      {
+        "title": "[Source 2 title]",
+        "url": "[Source 2 URL]",
+        "type": "paper",
+        "notes": "[Optional reliability note]"
+      },
+      {
+        "title": "[Source 3 title]",
+        "url": "[Source 3 URL]",
+        "type": "report",
+        "notes": "[Optional reliability note]"
+      }
+    ]
+  },
+  "fetched": [
+    {
+      "title": "[Source 1 title]",
+      "url": "[Source 1 URL]",
+      "type": "article",
+      "notes": "[Optional reliability note]",
+      "ok": false,
+      "error": "TypeError [ERR_INVALID_URL]: Invalid URL"
+    },
+    {
+      "title": "[Source 2 title]",
+      "url": "[Source 2 URL]",
+      "type": "paper",
+      "notes": "[Optional reliability note]",
+      "ok": false,
+      "error": "TypeError [ERR_INVALID_URL]: Invalid URL"
+    },
+    {
+      "title": "[Source 3 title]",
+      "url": "[Source 3 URL]",
+      "type": "report",
+      "notes": "[Optional reliability note]",
+      "ok": false,
+      "error": "TypeError [ERR_INVALID_URL]: Invalid URL"
+    }
+  ],
+  "timestamp": 1787173333434
+}
