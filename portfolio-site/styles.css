@@ -1,0 +1,25 @@
+:root{
+  --bg:#0f1724; /* dark slate */
+  --card:#0b1220;
+  --text:#e6eef8;
+  --muted:#9fb0c6;
+  --accent:#3b82f6;
+}
+*{box-sizing:border-box}
+body{font-family:Inter,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial,sans-serif;margin:0;background:linear-gradient(180deg,#071024, #0b1630);color:var(--text);line-height:1.45}
+.container{max-width:900px;margin:0 auto;padding:28px}
+.site-header{padding:36px 0 14px}
+.name{font-size:28px;margin:0}
+.position{color:var(--muted);margin:6px 0 12px}
+.links a{color:var(--accent);margin-right:12px;text-decoration:none}
+.card{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03);padding:18px;border-radius:8px;margin-bottom:18px}
+.projects{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr;gap:12px}
+.projects h3{margin:0 0 6px}
+.btn{display:inline-block;padding:8px 12px;background:var(--accent);color:white;border-radius:6px;text-decoration:none}
+.badge-placeholder{background:rgba(255,255,255,0.02);padding:16px;border-radius:6px;color:var(--muted);text-align:center}
+.site-footer{padding:18px 0 40px;color:var(--muted);font-size:13px}
+
+@media(min-width:720px){
+  .projects{grid-template-columns:repeat(2,1fr)}
+  .name{font-size:36px}
+}
